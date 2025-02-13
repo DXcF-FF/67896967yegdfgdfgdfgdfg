@@ -1,15 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Валентинка</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('/static/bg.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 64, 129, 0.4);
+        }
+
+        h1 {
+            color: #e91e63;
+            font-size: 2.8em;
+            margin: 0 0 30px 0;
+            font-family: 'Impact', fantasy;
+        }
+
+        .gif {
+            max-width: 400px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: transform 0.3s;
+            font-family: 'Impact', fantasy;
+        }
+
+        .yes {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .no {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-
-    <header>
+    <div class="container">
+        <h1 id="text">Хочешь быть моей валентинкой?</h1>
+        <img id="gif" src="/static/original.gif" class="gif">
         
-    </header>
-    
+        <div class="buttons">
+            <button id="yesBtn" class="btn yes" onclick="handleYes()">ДА!</button>
+            <button id="noBtn" class="btn no" onclick="handleNo()">Нет</button>
+        </div>
+    </div>
+
+    <script>
+        let noBtnClickCount = 0;
+
+        function handleYes() {
+            document.getElementById('text').innerHTML = 'Спасибочкииии Люблю тебя❤❤';
+            document.getElementById('gif').src = "/static/new_gif.gif";
+            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('noBtn').style.display = 'none';
+        }
+
+        function handleNo() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            
+            const currentYesSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = `${currentYesSize * 1.1}px`;
+            
+            const currentNoSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
+            noBtn.style.fontSize = `${currentNoSize * 0.9}px`;
+            
+            noBtn.style.position = 'relative';
+            noBtn.style.left = `${Math.random() * 40 - 20}px`;
+            noBtn.style.top = `${Math.random() * 40 - 20}px`;
+            
+            noBtnClickCount++;
+        }
+    </script>
 </body>
 </html>
